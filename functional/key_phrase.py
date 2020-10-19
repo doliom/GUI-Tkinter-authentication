@@ -1,7 +1,7 @@
 from tkinter import *
+import hashlib
 from tkinter import messagebox
 from pathlib import Path
-import csv
 
 class KeyPhrase:
     def __init__(self, root, row):
@@ -20,11 +20,18 @@ class KeyPhrase:
         self.root.mainloop()
 
     def ok(self):
-        pass
+        k_phrase = self.key_phrase.get()
+        if len(k_phrase) != 0:
+            hash_key = hashlib.md5(k_phrase.encode())
+            path = Path('hash_key.txt')
+            with open(path, 'w') as hashfile:
+                hashfile.write(hash_key.hexdigest())
+        else:
+            messagebox.showerror(title="Empty phrase", message="The key phrase cannot be empty.")
 
     def back_to_prev(self):
         self.root.destroy()
         screen = Tk()
         from admin import Admin
-        a_screen = Admin(screen, self.row1)
+        a_screen = Admin(screen, self.row)
         screen.mainloop()

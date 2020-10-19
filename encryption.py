@@ -1,8 +1,10 @@
 from cryptography.fernet import Fernet
 from pathlib import Path
 from sys_info import write_sys_info
+
 def write_key(): # створюємо ключ і зберігаємо в файл
     key = Fernet.generate_key()
+
     with open('crypto.key', 'wb') as key_file:
         key_file.write(key)
 
@@ -11,6 +13,7 @@ def load_key(): # завантажуємо 'crypto.key'
 
 def encrypt(filename, key): # шифруємо файл
     f = Fernet(key)
+    print(f)
     with open(filename, 'rb') as file:
         file_data = file.read()
     encrypted_data = f.encrypt(file_data)
