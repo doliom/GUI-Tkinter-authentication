@@ -2,6 +2,7 @@ from tkinter import *
 import hashlib
 from tkinter import messagebox
 from pathlib import Path
+from config import HASH_KEY_PATH
 
 class KeyPhrase:
     def __init__(self, root, row):
@@ -23,9 +24,11 @@ class KeyPhrase:
         k_phrase = self.key_phrase.get()
         if len(k_phrase) != 0:
             hash_key = hashlib.md5(k_phrase.encode())
-            path = Path('hash_key.txt')
+            path = Path(HASH_KEY_PATH)
             with open(path, 'w') as hashfile:
                 hashfile.write(hash_key.hexdigest())
+            self.input_kphrase.delete(0, END)
+            messagebox.showinfo(title="Great!", message="New passphrase entered successfully")
         else:
             messagebox.showerror(title="Empty phrase", message="The key phrase cannot be empty.")
 

@@ -23,6 +23,8 @@ class Admin:
         Label(self.root, text="", bg="DarkSeaGreen").pack()
         Button(self.root, text="PASSWORD RESTRICTIONS", bd=3, bg="PapayaWhip", fg="black", width="50", command=self.password_rest).pack()
         Label(self.root, text="", bg="DarkSeaGreen").pack()
+        Button(self.root, text="ENTER KEY PHRASE", bd=3, bg="PapayaWhip", fg="black", width="50", command=self.enter_pass_phrase).pack()
+        Label(self.root, text="", bg="DarkSeaGreen").pack()
         Button(self.root, text="SIGN OUT", bd=3, bg="PapayaWhip", fg="black", width="50", command=self.sign_out).pack()
         Label(self.root, text="", bg="DarkSeaGreen").pack()
 
@@ -72,5 +74,5 @@ class Admin:
         self.root.destroy()
         screen = Tk()
         from functional.key_phrase import KeyPhrase
-        pass_screen = KeyPhrase(screen)
+        pass_screen = KeyPhrase(screen, self.row)
         screen.mainloop()
